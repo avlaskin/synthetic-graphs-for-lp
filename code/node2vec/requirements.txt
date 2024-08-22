@@ -1,0 +1,10 @@
+absl-py
+google-cloud
+google-cloud-firestore
+google-cloud-storage
+google-cloud-secret-manager
+numpy
+networkx
+scikit-learn
+scipy==1.12.0
+gensim
