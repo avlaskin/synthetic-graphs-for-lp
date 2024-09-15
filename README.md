@@ -4,4 +4,6 @@ This project is a result for multi year research to evaluate methods on link pre
 
 ## How to use
 
-TBC
+Run the gadio app using command:
+```
+```
