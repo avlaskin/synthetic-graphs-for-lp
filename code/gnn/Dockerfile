@@ -16,7 +16,7 @@ RUN pip install --trusted-host pypi.python.org -r requirements.txt
 COPY . .
 
 # Run main.py when the container launches
-CMD python3 main.py
+CMD ["python3", "main.py"]
 
 
 
