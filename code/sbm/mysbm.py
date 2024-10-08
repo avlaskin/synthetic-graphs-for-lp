@@ -232,7 +232,7 @@ def save_exp_results(filename: str, results: List):
 
 def sbm_work(data: dict, degCorrected: bool = False):
     st = time.monotonic()
-    config = MySBMConfig(iterations=2, degreeCorrected=degCorrected)
+    config = MySBMConfig(iterations=20, degreeCorrected=degCorrected)
     model = MySBMModel()
     score, ntime = compute_file_no_sampling_results(config, model, data)
     return score, ntime, model
