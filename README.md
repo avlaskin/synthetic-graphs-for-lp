@@ -10,10 +10,14 @@ pip install -r requirements.txt
 
 ```
 
-## How to use
+## How to use Generator
 
 Run the gadio app using command:
 ```
 cd code/gen/
 python genapp.py
 ```
+
+## How to use inference scripts
+
+Check this [section](https://github.com/avlaskin/synthetic-graphs-for-lp/tree/main/code/cloudrun/run).

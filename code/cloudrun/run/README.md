@@ -3,7 +3,7 @@
 ## This is how to run this on Google Cloud
 
 1. Setup bucket with name "graphs-data" in GCP project.
-(GCP Storage UI)[https://console.cloud.google.com/storage/browser]
+[GCP Storage UI](https://console.cloud.google.com/storage/browser)
 
 2. Setup creadentials json file in the Secret manager. This should be able to read and write to Firebase DB.
 
