@@ -65,7 +65,9 @@ if __name__ == "__main__":
     graph_set = int(GRAPH_SIMBOL)
     i = graph_set
     j = index % 10
-    n = int(N) if N else None
+    N = None
+    if prefix in {'faaa', 'faab'}:
+        N = 3200
     k = get_json_key()
     if N:
         fname = "graph_%s%d_%d_%d.pkl" % (prefix, i, n, j)

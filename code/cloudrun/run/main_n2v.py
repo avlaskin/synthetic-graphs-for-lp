@@ -25,6 +25,7 @@ ATTEMPT_INDEX = os.getenv("ATTEMPT_INDEX", 0)
 TASK_PREFIX = os.getenv("TASK_PREFIX", "")
 PROJECT_ID = os.getenv("PROJECT_ID", "")
 LOCAL_DATA = os.getenv("LOCAL_DATA", "../../../../data/")
+N = os.getenv("N", None)
 
 handler = logging.StreamHandler(sys.stdout)
 handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
@@ -61,12 +62,14 @@ if __name__ == "__main__":
         prefix = "faab"
     else:
         prefix = task_prefix
+    N = None
+    if prefix in {'faaa', 'faab'}:
+        N = 3200
     local_run = detect_local_run(PROJECT_ID)
     index = int(TASK_INDEX) + int(ATTEMPT_INDEX)
     graph_set = int(GRAPH_SIMBOL)
     i = graph_set
     j = index % 10
-    N = None #3200
     k = get_json_key()
     if N:
         fname = "graph_%s%d_%d_%d.pkl" % (prefix, i, N, j)

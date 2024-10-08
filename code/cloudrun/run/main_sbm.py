@@ -50,7 +50,7 @@ def do_work(local_name: str,
             print("This calculation has been done. ", datetime.now())
             return
     data = get_graph_data(local_name)   
-    s,t, m = sbm_work(data)
+    s,t,m = sbm_work(data, False)
     string = "%f,%f" % (s, t)
     asyncio.run(write_result(prefix, i, j, data=string, method='sbm', json_key=json_key, local_run=local_run))
 
@@ -66,7 +66,10 @@ if __name__ == "__main__":
     graph_set = int(GRAPH_SIMBOL)
     i = graph_set
     j = index % 10
-    N = None#3200
+    N = None
+    if prefix in {'faaa', 'faab'}:
+        N = 3200
+
     k = get_json_key()
     if N:
         fname = "graph_%s%d_%d_%d.pkl" % (prefix, i, N, j)

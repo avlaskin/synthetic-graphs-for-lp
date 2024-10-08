@@ -230,7 +230,7 @@ def save_exp_results(filename: str, results: List):
         fw.close()
         print("RESULTS SAVED to ", filename)
 
-def sbm_work(data: dict, degCorrected: bool):
+def sbm_work(data: dict, degCorrected: bool = False):
     st = time.monotonic()
     config = MySBMConfig(iterations=2, degreeCorrected=degCorrected)
     model = MySBMModel()
