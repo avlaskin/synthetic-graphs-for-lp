@@ -10,16 +10,13 @@ if [ -z "$1" ]; then
     exit 1;
 fi
 
-if [ -z "$2" ]; then
-    
+if [ -z "$2" ]; then    
     echo "Specify graph index, typically - [0; 10]"
     exit 1;
 fi
 
-
-export CLOUD_PROJECT=
+export CLOUD_PROJECT=${PROJECT_ID}
 export CONFIG_NAME="${1}-job"
-
 
 # Cheap regions
 timestamp=$(date +%s)
@@ -28,10 +25,10 @@ echo "Creating a job" ${CLOUD_PROJECT} "/" ${CONFIG_NAME} " - " $CONFIG_NAME-${2
 echo "Epochs " ${3}
 
 if [ "gnn" == "$1" ]; then
-    gcloud beta run jobs create $CONFIG_NAME-${2}-${timestamp} --image gcr.io/${CLOUD_PROJECT}/${CONFIG_NAME} --set-env-vars GRAPH_INDEX=${2} --set-env-vars PROJECT_ID="${PROJECT_ID}" --set-env-vars EPOCHS=${3} --set-env-vars TASK_PREFIX=gaab --cpu 8 --memory 5G --execute-now --tasks 10 --task-timeout 14400 --region "${regions[$2]}" --max-retries 1
+    gcloud beta run jobs create $CONFIG_NAME-${2}-${timestamp} --image gcr.io/${CLOUD_PROJECT}/${CONFIG_NAME} --set-env-vars GRAPH_INDEX=${2} --set-env-vars PROJECT_ID="${PROJECT_ID}" --set-env-vars EPOCHS=${3} --set-env-vars TASK_PREFIX=gaab --cpu 8 --memory 5G --execute-now --tasks 1 --task-timeout 14400 --region "${regions[$2]}" --max-retries 1
 
 else
-    gcloud beta run jobs create $CONFIG_NAME-${2}-${timestamp} --image gcr.io/${CLOUD_PROJECT}/${CONFIG_NAME} --set-env-vars GRAPH_INDEX=${2} --set-env-vars PROJECT_ID="${PROJECT_ID}" --set-env-vars EPOCHS=${3} --set-env-vars TASK_PREFIX=gaab --cpu 4 --memory 5G --execute-now --tasks 1 --task-timeout 14400 --region "${regions[$2]}"
+    gcloud beta run jobs create $CONFIG_NAME-${2}-${timestamp} --image gcr.io/${CLOUD_PROJECT}/${CONFIG_NAME} --set-env-vars GRAPH_INDEX=${2} --set-env-vars PROJECT_ID="${PROJECT_ID}" --set-env-vars EPOCHS=${3} --set-env-vars TASK_PREFIX=gaab --cpu 4 --memory 5G --execute-now --tasks 1 --task-timeout 14400 --region "${regions[$2]}" --max-retries 1
     
 fi
 

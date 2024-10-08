@@ -6,10 +6,9 @@ if [ -z "$1" ]; then
     echo "Specify method: n2v, sbm or gnn"
     exit 1;
 fi
+echo "Cleaning first."
 
-rm -r ./jobs/module/*
-rm ./jobs/Dockerfile
-rm ./jobs/requirements.txt
+./clean.sh
 
 echo "Copying the common code"
 cp ../../common/* ./jobs/module/
