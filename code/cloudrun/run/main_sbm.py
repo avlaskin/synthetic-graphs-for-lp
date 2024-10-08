@@ -11,7 +11,7 @@ from module import experiments
 from module.mstorage import read_bucket_to_file, write_file_to_bucket
 from module.experiments import GraphParams, get_graph_data
 sys.modules['experiments'] = experiments
-from mysbm import sbm_work
+from module.mysbm import sbm_work
 from module.msecrets import access_secret_version, get_json_key
 from module.mdb import init_firebase, post_data
 from module.mwriter import write_result, detect_local_run, read_local_data

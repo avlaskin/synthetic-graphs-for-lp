@@ -1,7 +1,6 @@
 absl-py
 google-cloud
 google-cloud-storage
+google-cloud-secret-manager
 numpy
-networkx
-sklearn
 gensim

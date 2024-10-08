@@ -1,18 +1,5 @@
 #!/bin/bash
 
-cd jobs
-
-./prepare.sh "${1}"
-
-rm *~
-rm -r __pycache__
-
-echo "Setting up environment."
-
-export CLOUD_PROJECT=alexey-api
-export CONFIG_NAME="${1}-job"
-
-
 if [ -z "${PROJECT_ID}" ]; then
     echo "Set PROJECT_ID"
     exit 1;
@@ -23,6 +10,20 @@ if [ -z "$1" ]; then
     echo "Specify method: n2v, sbm or gnn"
     exit 1;
 fi
+
+./prepare.sh "${1}"
+
+export CLOUD_PROJECT=${PROJECT_ID}
+
+cd ./jobs
+
+rm *~
+rm -r __pycache__
+
+echo "Setting up environment."
+
+export CONFIG_NAME="${1}-job"
+
 
 gcloud config set project ${CLOUD_PROJECT}
 gcloud config set run/region us-central1
