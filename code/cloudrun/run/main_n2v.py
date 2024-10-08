@@ -8,7 +8,7 @@ import sys
 
 from datetime import datetime
 from module import experiments
-from module.mstorage import read_bucket_to_file, write_file_to_bucket
+from module.mstorage import read_bucket_to_file, write_file_to_bucket, read_data
 from module.experiments import GraphParams, get_graph_data
 sys.modules['experiments'] = experiments
 from module.mynode2vec import n2v_work
@@ -28,19 +28,6 @@ LOCAL_DATA = os.getenv("LOCAL_DATA", "../../../../data/")
 
 handler = logging.StreamHandler(sys.stdout)
 handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
-
-
-def read_data(fname: str, local_name: str) -> str:
-    json_key = get_json_key()
-    name = read_bucket_to_file(json_key,
-                               BUCKET_NAME,
-                               "data/" + fname,
-                               local_name)
-    if name:
-        ### Data has been read
-        logging.info("File is read all good")
-        return local_name
-    return None
 
 
 def do_work(local_name: str,
@@ -79,7 +66,7 @@ if __name__ == "__main__":
     graph_set = int(GRAPH_SIMBOL)
     i = graph_set
     j = index % 10
-    N = 3200
+    N = None #3200
     k = get_json_key()
     if N:
         fname = "graph_%s%d_%d_%d.pkl" % (prefix, i, N, j)
@@ -88,10 +75,13 @@ if __name__ == "__main__":
 
     print("Starting the task file %s - %d %d %s" % (fname, graph_set, index, datetime.now()))
     local_name = "/tmp/%s" % fname
-    logging.info("Starting reading the file %s" % fname)
+    print("Starting reading the file %s" % fname)
     res = True # for local run
     if not local_run:
-        res = read_data(fname, local_name)
+        res = read_data(fname=fname,
+                        local_name=local_name,
+                        bucket_name=BUCKET_NAME,
+                        json_key=k)
         print('Result of the remote read: ', res)
     else:
         res = read_local_data(fname, local_name, LOCAL_DATA)

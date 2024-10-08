@@ -25,10 +25,10 @@ echo "Creating a job" ${CLOUD_PROJECT} "/" ${CONFIG_NAME} " - " $CONFIG_NAME-${2
 echo "Epochs " ${3}
 
 if [ "gnn" == "$1" ]; then
-    gcloud beta run jobs create $CONFIG_NAME-${2}-${timestamp} --image gcr.io/${CLOUD_PROJECT}/${CONFIG_NAME} --set-env-vars GRAPH_INDEX=${2} --set-env-vars PROJECT_ID="${PROJECT_ID}" --set-env-vars EPOCHS=${3} --set-env-vars TASK_PREFIX=gaab --cpu 8 --memory 5G --execute-now --tasks 1 --task-timeout 14400 --region "${regions[$2]}" --max-retries 1
+    gcloud beta run jobs create $CONFIG_NAME-${2}-${timestamp} --image gcr.io/${CLOUD_PROJECT}/${CONFIG_NAME} --set-env-vars GRAPH_INDEX=${2} --set-env-vars PROJECT_ID="${PROJECT_ID}" --set-env-vars EPOCHS=${3} --set-env-vars TASK_PREFIX=gaaa --cpu 8 --memory 5G --execute-now --tasks 1 --task-timeout 14400 --region "${regions[$2]}" --max-retries 1
 
 else
-    gcloud beta run jobs create $CONFIG_NAME-${2}-${timestamp} --image gcr.io/${CLOUD_PROJECT}/${CONFIG_NAME} --set-env-vars GRAPH_INDEX=${2} --set-env-vars PROJECT_ID="${PROJECT_ID}" --set-env-vars EPOCHS=${3} --set-env-vars TASK_PREFIX=gaab --cpu 4 --memory 5G --execute-now --tasks 1 --task-timeout 14400 --region "${regions[$2]}" --max-retries 1
+    gcloud beta run jobs create $CONFIG_NAME-${2}-${timestamp} --image gcr.io/${CLOUD_PROJECT}/${CONFIG_NAME} --set-env-vars GRAPH_INDEX=${2} --set-env-vars PROJECT_ID="${PROJECT_ID}" --set-env-vars EPOCHS=${3} --set-env-vars TASK_PREFIX=gaaa --cpu 4 --memory 5G --execute-now --tasks 1 --task-timeout 14400 --region "${regions[$2]}" --max-retries 1
     
 fi
 

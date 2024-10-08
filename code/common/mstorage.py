@@ -37,14 +37,17 @@ def read_data(fname: str,
               local_name: str,
               bucket_name: str,
               json_key: str) -> str:
+    """Reads data from the bucket."""
+    full_name = "data/" + fname
+    print('Reading %s from %s' % (full_name, bucket_name))
     name = read_bucket_to_file(json_key,
                                bucket_name,
-                               "data/" + fname,
+                               full_name,
                                local_name)
     if name:
-        ### Data has been read
-        logging.info("File is read all good")
+        print('File is read all good')
         return local_name
+    print('File was not found.')
     return None
 
 
