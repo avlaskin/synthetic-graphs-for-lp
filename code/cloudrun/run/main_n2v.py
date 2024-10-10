@@ -25,7 +25,6 @@ ATTEMPT_INDEX = os.getenv("ATTEMPT_INDEX", 0)
 TASK_PREFIX = os.getenv("TASK_PREFIX", "")
 PROJECT_ID = os.getenv("PROJECT_ID", "")
 LOCAL_DATA = os.getenv("LOCAL_DATA", "../../../../data/")
-N = os.getenv("N", None)
 
 handler = logging.StreamHandler(sys.stdout)
 handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
@@ -52,8 +51,9 @@ def do_work(local_name: str,
             return
     data = get_graph_data(local_name)   
     s,t, m = n2v_work(data, params={})
-    string = "%f,%f" % (s, t)
-    asyncio.run(write_result(prefix, i, j, data=string, method='n2v', json_key=json_key, local_run=local_run))
+    result = "%f,%f" % (s, t)
+    print('Results: %s' % result)
+    asyncio.run(write_result(prefix, i, j, data=result, method='n2v', json_key=json_key, local_run=local_run))
 
 
 if __name__ == "__main__":
@@ -70,7 +70,6 @@ if __name__ == "__main__":
     graph_set = int(GRAPH_SIMBOL)
     i = graph_set
     j = index % 10
-    k = get_json_key()
     if N:
         fname = "graph_%s%d_%d_%d.pkl" % (prefix, i, N, j)
     else:
@@ -81,10 +80,11 @@ if __name__ == "__main__":
     print("Starting reading the file %s" % fname)
     res = True # for local run
     if not local_run:
+        json_key = get_json_key()
         res = read_data(fname=fname,
                         local_name=local_name,
                         bucket_name=BUCKET_NAME,
-                        json_key=k)
+                        json_key=json_key)
         print('Result of the remote read: ', res)
     else:
         res = read_local_data(fname, local_name, LOCAL_DATA)
