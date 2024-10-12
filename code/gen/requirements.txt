@@ -1,2 +1,4 @@
 gradio
 networkx
+scipy
+scikit-learn
